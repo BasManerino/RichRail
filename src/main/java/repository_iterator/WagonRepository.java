@@ -45,7 +45,7 @@ public class WagonRepository implements Container, Repository<TrainComponent>, S
 		this.allWagons.add(wagon);
 	}
 	
-	public void remove(int cursor) {
-		this.allWagons.remove(cursor);
+	public void remove(TrainComponent wagon) {
+		this.allWagons.remove(wagon);
 	}
 }

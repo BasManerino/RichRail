@@ -9,26 +9,40 @@ public abstract class Wagon implements TrainComponent, Serializable{
 	private int numseats;
 	private float maxweight;
 	
+	private boolean isAttached;
+	
 	public Wagon(String id) {
 		this.id = id;
+		this.isAttached = false;
 	}
 	
 	public Wagon(String id, int numseats) {
 		this.id = id;
 		this.numseats = numseats;
+		this.isAttached = false;
 	}
 	
 	public Wagon(String id, float maxweight) {
 		this.id = id;
 		this.maxweight = maxweight;
+		this.isAttached = false;
 	}
 	
 	public Wagon(String id, int numseats, float maxweight) {
 		this.id = id;
 		this.numseats = numseats;
 		this.maxweight = maxweight;
+		this.isAttached = false;
 	}
 	
+	public boolean isAttached() {
+		return isAttached;
+	}
+
+	public void setAttached(boolean isAttached) {
+		this.isAttached = isAttached;
+	}
+
 	public int getNumseats() {
 		return numseats;
 	}

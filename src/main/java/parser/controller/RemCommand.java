@@ -1,6 +1,7 @@
 package parser.controller;
 
 import abstract_classes.Locomotive;
+import abstract_classes.Wagon;
 import abstract_classes.TrainComponent;
 import parser.RichRailCli;
 import parser.RichRailParser;
@@ -20,12 +21,14 @@ public class RemCommand {
           		for (Iterator iter2 = cli.allWagons.getIterator(); iter2.hasNext();) {
         			TrainComponent wagon = iter2.next();
         			if(wagon.getId().equals(wagonid)) {
+        				//check if this wagon is attached to this train
         				for(TrainComponent wagono : ((Locomotive) locomotive).getComponentList()){
         					if(wagono.getId().equals(wagonid)) {
                 				((Locomotive) locomotive).removeComponent(wagono);
-                					cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
-                    		        System.out.println("Wagon with id " + wagonid + " has been removed from train with id " + locoid + ".");
-                    				return;
+                				((Wagon) wagon).setAttached(false);
+            					cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
+                		        System.out.println("Wagon with id " + wagonid + " has been removed from train with id " + locoid + ".");
+                				return;
         					}
         				}
         				System.out.println("This wagon is not attached to this train.");

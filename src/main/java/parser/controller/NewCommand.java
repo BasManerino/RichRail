@@ -21,13 +21,22 @@ public class NewCommand {
 	public void execute(RichRailParser.NewcommandContext ctx) {
         String id = ctx.ID().getText();
         
-        int numseats = 0;
-        float maxweight = 0;
+        //set a default value if the user didn't give a parameter
+        int numseats;
+        float maxweight;
         
-        List<TerminalNode> options = ctx.NUMBER();
-        if(!options.isEmpty()) {
-	        numseats = Integer.parseInt(options.get(0).toString());
-	        maxweight = Float.parseFloat(options.get(1).toString());
+        try {
+        	numseats = Integer.parseInt(ctx.NUMSEATS().toString());
+        }
+        catch(NullPointerException e) {
+        	numseats = 0;
+        }
+        
+        try {
+        	maxweight = Float.parseFloat(ctx.MAXWEIGHT().toString());
+        }
+        catch(NullPointerException e) {
+        	maxweight = 0;
         }
         
         if(ctx.type().getText().equals("train"))

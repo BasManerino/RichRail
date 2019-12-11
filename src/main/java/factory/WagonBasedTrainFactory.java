@@ -1,9 +1,9 @@
 package factory;
 
 import abstract_classes.TrainComponent;
-import model.FreightWagon;
-import model.PersonWagon;
-import model.PlainWagon;
+import pojos.FreightWagon;
+import pojos.PersonWagon;
+import pojos.PlainWagon;
 
 public class WagonBasedTrainFactory implements TrainFactory{
 

@@ -1,7 +1,7 @@
 package factory;
 
 import abstract_classes.TrainComponent;
-import model.PlainLocomotive;
+import pojos.PlainLocomotive;
 
 public class LocomotiveBasedTrainFactory implements TrainFactory {
 	

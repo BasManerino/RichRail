@@ -1,4 +1,4 @@
-package model;
+package pojos;
 
 import abstract_classes.Wagon;
 

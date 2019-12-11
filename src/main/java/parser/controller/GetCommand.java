@@ -20,6 +20,7 @@ public class GetCommand {
     	        	TrainComponent locomotive = iter.next();
 	            	if(locomotive.getId().equals(id)) {
 	            		switch(option) {
+	            		//check what the user asked for
 	            		case "numseats":
     	            		System.out.println("Locomotive with id " + id + " has " + locomotive.getNumseats() + " seats.");
     	            		return;
@@ -31,7 +32,9 @@ public class GetCommand {
     	            		return;
 	            		}
 	            	}
-	            }  
+	            }
+        		System.out.println("This train does not exist.");
+        		return;
     	  case "wagon":
       		for (Iterator iter2 = cli.allWagons.getIterator(); iter2.hasNext();) {
     			TrainComponent wagon = iter2.next();
@@ -48,9 +51,11 @@ public class GetCommand {
     	            		return;
 	            		}
 	            	}
-	            }  
+	            }
+				System.out.println("This wagon does not exist.");
+				return;
     	  default: 
-    	    System.out.println(type + " is not a valid train component.");
+    	    System.out.println("This is not a valid train component.");
     	    return;
     	}
     }

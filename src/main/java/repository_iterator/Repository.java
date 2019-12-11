@@ -5,5 +5,5 @@ import abstract_classes.TrainComponent;
 public interface Repository<components> {
     void add(TrainComponent component);
 
-    void remove(int index);
+    void remove(TrainComponent component);
 }

@@ -45,7 +45,7 @@ public class LocomotiveRepository implements Container, Repository<TrainComponen
 		this.allLocomotives.add(locomotive);
 	}	
     
-	public void remove(int cursor) {
-		this.allLocomotives.remove(cursor);
+	public void remove(TrainComponent locomotive) {
+		this.allLocomotives.remove(locomotive);
 	}
 }

@@ -29,4 +29,16 @@ public class Observer{
 		}
 
     }
+    
+    public void setAll(RepositoryManager repo, LocomotiveRepository allLocomotives, WagonRepository allWagons, PersistenceAdapter persister) {
+        try {
+        	repo.setWagons(allWagons);
+        	repo.setLocomotives(allLocomotives);
+			persister.saveData(repo);
+		} catch (IOException e) {
+			System.out.println(e);
+			return;
+		}
+
+    }
 }

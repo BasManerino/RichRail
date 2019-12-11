@@ -3,9 +3,11 @@ package abstract_classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import repository_iterator.Iterator;
+
 import java.io.Serializable;
 
-public abstract class Locomotive implements TrainComponent, Serializable{
+public abstract class Locomotive implements TrainComponent, Serializable, Iterator{
 
 	private static final long serialVersionUID = 1L;
 	private String id;
@@ -72,5 +74,33 @@ public abstract class Locomotive implements TrainComponent, Serializable{
 	
 	public void clearComponentList() {
 		this.wagonList.clear();
+	}
+	
+	public Iterator getIterator() {
+	      return new ComponentIterator();
+	}
+	
+	private class ComponentIterator implements Iterator{
+
+	    int index;
+
+	    @Override
+	    public boolean hasNext() {
+	    
+	       if(index < wagonList.size()){
+	          return true;
+	       }
+	       return false;
+	    }
+
+	    @Override
+	    public TrainComponent next() {
+	    
+	       if(this.hasNext()){
+	          return wagonList.get(index++);
+	       }
+	       return null;
+	    }	
+
 	}
 }
