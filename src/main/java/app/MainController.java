@@ -5,11 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import parser.RichRailCli;
 import parser.RichRailParser;
 import repository_iterator.Iterator;
+import parser.controller.*;
 
 import java.net.URL;
 import java.util.List;
@@ -18,6 +22,10 @@ import java.util.ResourceBundle;
 
 import abstract_classes.Locomotive;
 import abstract_classes.TrainComponent;
+import abstract_classes.Wagon;
+import factory.LocomotiveBasedTrainFactory;
+import factory.TrainFactory;
+import factory.WagonBasedTrainFactory;
 public class MainController implements Initializable{
 	@FXML
 	private Label myMessage;
@@ -46,39 +54,56 @@ public class MainController implements Initializable{
 		//mylabel.setText(comboBox.getValue());
 	}
 	
-		RichRailCli cli = new RichRailCli();
+	RichRailCli cli = new RichRailCli();
+	
+	@FXML
+	Button executebtn;
+	@FXML
+	Button trainbtn;
+	@FXML
+	Button wagonbtn;
+	@FXML
+	public TextField id;
+	@FXML
+	public TextField numseats;
+	@FXML
+	public TextField maxweight;
+	@FXML
+	public TextField idwagon;
+	@FXML
+	public TextField numseatswagon;
+	@FXML
+	public TextField maxweightwagon;
+	@FXML
+	public TextArea commandview;
+	@FXML
+	public TextArea commandview2;
+	
+
+	
+	public void getTrainFields (ActionEvent event) {
+		id.getText();
+		numseats.getText();
+		maxweight.getText();
+		System.out.println(id.getText() + " " + numseats.getText() + " " + maxweight.getText());
+		NewCommand command = new NewCommand();
+		command.execute(id.getText(), Integer.parseInt(numseats.getText()),  Float.parseFloat(maxweight.getText()), "train");
+	}
+	
+	public void getWagonFields (ActionEvent event) {
+		idwagon.getText();
+		numseatswagon.getText();
+		maxweightwagon.getText();
+		System.out.println(idwagon.getText() + " " + numseatswagon.getText() + " " + maxweightwagon.getText());
+		NewCommand command = new NewCommand();
+		command.execute(idwagon.getText(), Integer.parseInt(numseatswagon.getText()),  Float.parseFloat(maxweightwagon.getText()), "wagon");
+	}
+	
+	 public void writeToScreen(String text) {
+		commandview.setText(text);
 		
-		public void execute(RichRailParser.AddcommandContext ctx) {
-			String wagonid = ctx.ID().get(0).getText();
-	        String locoid = ctx.ID().get(1).getText();
-	        
-	        for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
-	        	TrainComponent locomotive = iter.next();
-	        	if(locomotive.getId().equals(locoid)){
-	        		for (Iterator iter2 = cli.allWagons.getIterator(); iter2.hasNext();) {
-	        			TrainComponent wagon = iter2.next();
-	        			if(wagon.getId().equals(wagonid)) {
-	        				List<TrainComponent> components = ((Locomotive) locomotive).getComponentList();
-	        				for(TrainComponent wagono : components){
-	        					System.out.println(wagono.getId());
-	        				}
-	        				for(TrainComponent wagono2 : components){
-	        					if(wagono2.getId().equals(wagonid)) {
-	        						System.out.println("This wagon is already attached to this train.");
-	        						return;
-	        					}
-	        				}
-	        				((Locomotive) locomotive).addComponent(wagon);
-	        				    cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
-	            		        System.out.println("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
-	            				return;
-	        			}
-	        		}
-	               	System.out.println("This wagon does not exist.");
-	            	return;
-	        	}
-	        }
-	        System.out.println("This train does not exist.");
-	        return;
-	    }
+	}
+	
+	
+	
 	}
