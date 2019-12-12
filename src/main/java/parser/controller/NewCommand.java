@@ -18,28 +18,10 @@ public class NewCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(RichRailParser.NewcommandContext ctx) {
-        String id = ctx.ID().getText();
+	public void execute(String id, int numseats, float maxweight, String type) {
+
         
-        //set a default value if the user didn't give a parameter
-        int numseats;
-        float maxweight;
-        
-        try {
-        	numseats = Integer.parseInt(ctx.NUMSEATS().toString());
-        }
-        catch(NullPointerException e) {
-        	numseats = 0;
-        }
-        
-        try {
-        	maxweight = Float.parseFloat(ctx.MAXWEIGHT().toString());
-        }
-        catch(NullPointerException e) {
-        	maxweight = 0;
-        }
-        
-        if(ctx.type().getText().equals("train"))
+        if(type.equals("train"))
         {
         	for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         		TrainComponent loco = iter.next();
@@ -65,7 +47,7 @@ public class NewCommand {
     	        return;
         }
         
-        else if(ctx.type().getText().equals("wagon")) 
+        else if(type.equals("wagon")) 
         {
         	for (Iterator iter = cli.allWagons.getIterator(); iter.hasNext();) {
         		String wagonid = iter.next().getId();

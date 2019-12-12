@@ -9,11 +9,7 @@ public class GetCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(RichRailParser.GetcommandContext ctx) {
-		String id = ctx.ID().toString();
-    	String type = ctx.type().getText();
-    	String option = ctx.option().getText();
-    	
+	public void execute(String id, String type, String option) {	
     	switch(type) {
     	  case "train":
     	        for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {

@@ -17,10 +17,7 @@ public class DelCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(RichRailParser.DelcommandContext ctx) {
-		String id = ctx.ID().toString();
-    	String type = ctx.type().getText();
-    	
+	public void execute(String id, String type) {
     	//check if a locomotive or wagon should be deleted
     	switch(type) {
     	case "train":

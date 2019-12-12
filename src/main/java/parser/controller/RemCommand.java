@@ -11,10 +11,7 @@ public class RemCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(RichRailParser.RemcommandContext ctx) {
-		String wagonid = ctx.ID().get(0).getText();
-        String locoid = ctx.ID().get(1).getText();
-        
+	public void execute(String wagonid, String locoid) {
         for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         	TrainComponent locomotive = iter.next();
         	if(locomotive.getId().equals(locoid)){

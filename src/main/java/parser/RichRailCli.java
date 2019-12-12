@@ -2,10 +2,12 @@ package parser;
 
 import java.io.IOException;
 
+import abstract_classes.TrainComponent;
 import adapter_observer.PersistenceAdapter;
 import adapter_observer.Observer;
 import parser.RichRailBaseListener;
 import parser.RichRailParser;
+import repository_iterator.Iterator;
 import repository_iterator.LocomotiveRepository;
 import repository_iterator.RepositoryManager;
 import repository_iterator.WagonRepository;
@@ -31,27 +33,57 @@ public class RichRailCli extends RichRailBaseListener {
   
     @Override
     public void enterNewcommand(RichRailParser.NewcommandContext ctx) {
+        String id = ctx.ID().getText();
+        String type = ctx.type().getText();
+        
+        //set a default value if the user didn't give a parameter
+        int numseats;
+        float maxweight;
+        
+        try {
+        	numseats = Integer.parseInt(ctx.NUMSEATS().toString());
+        }
+        catch(NullPointerException e) {
+        	numseats = 0;
+        }
+        
+        try {
+        	maxweight = Float.parseFloat(ctx.MAXWEIGHT().toString());
+        }
+        catch(NullPointerException e) {
+        	maxweight = 0;
+        }
+        
         NewCommand command = new NewCommand();
-        command.execute(ctx);
+        command.execute(id, numseats, maxweight, type);
     }
     
     public void enterAddcommand(RichRailParser.AddcommandContext ctx) {
+		String wagonid = ctx.ID().get(0).getText();
+        String locoid = ctx.ID().get(1).getText();
         AddCommand command = new AddCommand();
-        command.execute(ctx);
+        command.execute(wagonid, locoid);
     }
     
     public void enterGetcommand(RichRailParser.GetcommandContext ctx) {
+		String id = ctx.ID().toString();
+    	String type = ctx.type().getText();
+    	String option = ctx.option().getText();
         GetCommand command = new GetCommand();
-        command.execute(ctx);
+        command.execute(id, type, option);
     }
     
     public void enterDelcommand(RichRailParser.DelcommandContext ctx) {
+		String id = ctx.ID().toString();
+    	String type = ctx.type().getText();
         DelCommand command = new DelCommand();
-        command.execute(ctx);
+        command.execute(id, type);
     }
     
     public void enterRemcommand(RichRailParser.RemcommandContext ctx) {
+		String wagonid = ctx.ID().get(0).getText();
+        String locoid = ctx.ID().get(1).getText();
         RemCommand command = new RemCommand();
-        command.execute(ctx);
+        command.execute(wagonid, locoid);
     }
 }

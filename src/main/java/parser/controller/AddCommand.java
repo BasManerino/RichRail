@@ -15,11 +15,7 @@ public class AddCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(RichRailParser.AddcommandContext ctx) {
-		//obtain the ids of the wagon and locomotive from the context
-		String wagonid = ctx.ID().get(0).getText();
-        String locoid = ctx.ID().get(1).getText();
-        
+	public void execute(String wagonid, String locoid) {     
         //check if the locomotive exists
         for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         	TrainComponent locomotive = iter.next();
