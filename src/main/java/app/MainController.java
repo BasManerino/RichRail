@@ -57,11 +57,11 @@ public class MainController implements Initializable{
 	RichRailCli cli = new RichRailCli();
 	
 	@FXML
-	Button executebtn;
+	public Button executebtn;
 	@FXML
-	Button trainbtn;
+	public Button trainbtn;
 	@FXML
-	Button wagonbtn;
+	public Button wagonbtn;
 	@FXML
 	public TextField id;
 	@FXML
@@ -79,31 +79,54 @@ public class MainController implements Initializable{
 	@FXML
 	public TextArea commandview2;
 	
-
-	
 	public void getTrainFields (ActionEvent event) {
-		id.getText();
-		numseats.getText();
-		maxweight.getText();
 		System.out.println(id.getText() + " " + numseats.getText() + " " + maxweight.getText());
+		int numseats2 = 0;
+		float maxweight2 = 0;
+		
+		try {
+			numseats2 = Integer.parseInt(numseats.getText());
+		}
+		
+		catch(NumberFormatException e) {
+			numseats2 = 0;
+		}
+		
+		try {
+			maxweight2 = Float.parseFloat(maxweight.getText());
+		}
+		
+		catch(NumberFormatException e) {
+			maxweight2 = 0;
+		}
+		
 		NewCommand command = new NewCommand();
-		command.execute(id.getText(), Integer.parseInt(numseats.getText()),  Float.parseFloat(maxweight.getText()), "train");
+		commandview2.setText(command.execute(id.getText(), numseats2, maxweight2, "train"));
 	}
 	
 	public void getWagonFields (ActionEvent event) {
-		idwagon.getText();
-		numseatswagon.getText();
-		maxweightwagon.getText();
-		System.out.println(idwagon.getText() + " " + numseatswagon.getText() + " " + maxweightwagon.getText());
-		NewCommand command = new NewCommand();
-		command.execute(idwagon.getText(), Integer.parseInt(numseatswagon.getText()),  Float.parseFloat(maxweightwagon.getText()), "wagon");
-	}
-	
-	 public void writeToScreen(String text) {
-		commandview.setText(text);
+		System.out.println(id.getText() + " " + numseats.getText() + " " + maxweight.getText());
+		int numseats2 = 0;
+		float maxweight2 = 0;
 		
+		try {
+			numseats2 = Integer.parseInt(numseatswagon.getText());
+		}
+		
+		catch(NumberFormatException e) {
+			numseats2 = 0;
+		}
+		
+		try {
+			maxweight2 = Float.parseFloat(maxweightwagon.getText());
+		}
+		
+		catch(NumberFormatException e) {
+			maxweight2 = 0;
+		}
+		
+		NewCommand command = new NewCommand();
+		commandview2.setText(command.execute(id.getText(), numseats2, maxweight2, "wagon"));
 	}
 	
-	
-	
-	}
+}

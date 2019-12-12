@@ -15,7 +15,7 @@ public class AddCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(String wagonid, String locoid) {     
+	public String execute(String wagonid, String locoid) {     
         //check if the locomotive exists
         for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         	TrainComponent locomotive = iter.next();
@@ -31,21 +31,21 @@ public class AddCommand {
             				((Wagon) wagon).setAttached(true);
             				//update the source file and view
         				    cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
-            		        System.out.println("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
-            				return;
+        				    System.out.println("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
+            		        return("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
         				}
         				else {
-            		        System.out.println("This wagon is already attached to a train.");
-            				return;
+        				    System.out.println("This wagon is already attached to a train.");
+            		        return("This wagon is already attached to a train.");
         				}
 
         			}
         		}
-               	System.out.println("This wagon does not exist.");
-            	return;
+			    System.out.println("This wagon does not exist.");
+               	return("This wagon does not exist.");
         	}
         }
-        System.out.println("This train does not exist.");
-        return;
+	    System.out.println("This train does not exist.");
+        return("This train does not exist.");
     }
 }

@@ -11,7 +11,7 @@ public class RemCommand {
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public void execute(String wagonid, String locoid) {
+	public String execute(String wagonid, String locoid) {
         for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         	TrainComponent locomotive = iter.next();
         	if(locomotive.getId().equals(locoid)){
@@ -24,19 +24,19 @@ public class RemCommand {
                 				((Locomotive) locomotive).removeComponent(wagono);
                 				((Wagon) wagon).setAttached(false);
             					cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
-                		        System.out.println("Wagon with id " + wagonid + " has been removed from train with id " + locoid + ".");
-                				return;
+            				    System.out.println("Wagon with id " + wagonid + " has been removed from train with id " + locoid + ".");
+                		        return("Wagon with id " + wagonid + " has been removed from train with id " + locoid + ".");
         					}
         				}
-        				System.out.println("This wagon is not attached to this train.");
-                    	return;
+    				    System.out.println("This wagon is not attached to this train.");
+        				return("This wagon is not attached to this train.");
         			}
         		}
-               	System.out.println("This wagon does not exist.");
-            	return;
+			    System.out.println("This wagon does not exist.");
+               	return("This wagon does not exist.");
         	}
         }
-        System.out.println("This train does not exist.");
-        return;
+	    System.out.println("This train does not exist.");
+        return("This train does not exist.");
     }
 }

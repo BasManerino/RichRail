@@ -24,25 +24,20 @@ import javafx.scene.control.TextArea;
 import parser.RichRailCli;
 import parser.RichRailParser;
 import repository_iterator.Iterator;
-import app.MainController;
 
 public class NewCommand {
 	
 	RichRailCli cli = new RichRailCli();
-	
-	MainController main = new MainController();
-	
-	
-	public void execute(String id, int numseats, float maxweight, String type) {
+
+	public String execute(String id, int numseats, float maxweight, String type) {
 
         if(type.equals("train"))
         {
         	for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         		TrainComponent loco = iter.next();
             	if(loco.getId().equals(id)) {
-            		System.out.println("There already exists a train with this name, please choose another one.");
-            		main.writeToScreen("There already exists a train with this name, please choose another one.");
-            		return;
+				    System.out.println("There already exists a train with this name, please choose another one.");
+            		return("There already exists a train with this name, please choose another one.");
             	}
             }
 
@@ -54,14 +49,12 @@ public class NewCommand {
             
             for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
             	String locoid = iter.next().getId();
-            	System.out.println(locoid);
-            	main.writeToScreen(locoid);
+			    System.out.println(locoid);
             }
             
             cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
-    	        System.out.println("Train with id " + loco.getId() + " has been created.");
-    	        main.writeToScreen("Train with id " + loco.getId() + " has been created.");
-    	        return;
+		    	System.out.println("Train with id " + loco.getId() + " has been created.");
+    	        return("Train with id " + loco.getId() + " has been created.");
         }
         
         else if(type.equals("wagon")) 
@@ -69,9 +62,8 @@ public class NewCommand {
         	for (Iterator iter = cli.allWagons.getIterator(); iter.hasNext();) {
         		String wagonid = iter.next().getId();
         		if(wagonid.equals(id)) {
-            		System.out.println("There already exists a wagon with this name, please choose another one.");
-            		main.writeToScreen("There already exists a wagon with this name, please choose another one.");
-            		return;
+				    System.out.println("There already exists a wagon with this name, please choose another one.");
+            		return("There already exists a wagon with this name, please choose another one.");
             	}
             }
             
@@ -83,14 +75,14 @@ public class NewCommand {
             
             for (Iterator iter = cli.allWagons.getIterator(); iter.hasNext();) {
             	String wagonid = iter.next().getId();
-            	System.out.println(wagonid);
-            	main.writeToScreen(wagonid);
+			    System.out.println(wagonid);
             }
             
             cli.observer.setWagons(cli.repo, cli.allWagons, cli.persister);
-    	        System.out.println("Wagon with name " + wagon.getId() + " has been created.");
-    	        main.writeToScreen("Wagon with name " + wagon.getId() + " has been created.");
-    	        return;
+		    	System.out.println("Wagon with name " + wagon.getId() + " has been created.");
+    	        return("Wagon with name " + wagon.getId() + " has been created.");
         }
+	    System.out.println("This is not a valid train component.");
+        return("This is not a valid train component.");
     }
 }
