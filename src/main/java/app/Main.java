@@ -23,7 +23,7 @@ public class Main extends Application {
 
             Scene scene = new Scene(root,600,400);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
+            
             primaryStage.setTitle("RichRail");
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -36,37 +36,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
-/*public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        while (true) {
-            System.out.print("Enter next command: ");
-            String line = in.nextLine();
-            if (line.toLowerCase().equals("exit") || line.isEmpty()) {
-                break;
-            }
-            
-            CharStream lineStream = CharStreams.fromString(line);
-            
-            // Tokenize / Lexical analysis
-            Lexer lexer = new RichRailLexer(lineStream);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-            // Create Parse Tree
-            RichRailParser parser = new RichRailParser(tokens);
-            ParseTree tree = parser.command();
-
-            // Create ParseTreeWalker and Custom Listener
-            ParseTreeWalker walker = new ParseTreeWalker();
-            RichRailListener listener = new RichRailCli();
-
-            // Walk over ParseTree using Custom Listener that listens to enter/exit events
-            walker.walk(listener, tree);
-        }
-        
-        in.close();
-    }
-}
-*/

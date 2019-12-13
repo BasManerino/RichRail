@@ -71,6 +71,8 @@ public class MainController implements Initializable{
 	@FXML
 	public TextField idwagon;
 	@FXML
+	public TextField command;
+	@FXML
 	public TextField numseatswagon;
 	@FXML
 	public TextField maxweightwagon;
@@ -129,4 +131,8 @@ public class MainController implements Initializable{
 		commandview2.setText(command.execute(id.getText(), numseats2, maxweight2, "wagon"));
 	}
 	
+	public void executeCLI(ActionEvent event) {
+		CLI cli = new CLI();
+		cli.bootUp(command.getText());
+	}
 }
