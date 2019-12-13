@@ -11,11 +11,13 @@ import repository_iterator.Iterator;
 
 //This class represent the add command.
 //Its responsibility is to add existing wagons to existing locomotives.
-public class AddCommand {
+public class AddCommand{
+	
+	private String finalMessage;
 	
 	RichRailCli cli = new RichRailCli();
 	
-	public String execute(String wagonid, String locoid) {     
+	public void execute(String wagonid, String locoid) {     
         //check if the locomotive exists
         for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
         	TrainComponent locomotive = iter.next();
@@ -32,20 +34,29 @@ public class AddCommand {
             				//update the source file and view
         				    cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
         				    System.out.println("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
-            		        return("Wagon with id " + wagonid + " has been added to train with id " + locoid + ".");
+            		        finalMessage = "Wagon with id " + wagonid + " has been added to train with id " + locoid + ".";
+        				    return;
         				}
         				else {
         				    System.out.println("This wagon is already attached to a train.");
-            		        return("This wagon is already attached to a train.");
+        				    finalMessage = "This wagon is already attached to a train.";
+        				    return;
         				}
 
         			}
         		}
 			    System.out.println("This wagon does not exist.");
-               	return("This wagon does not exist.");
+			    finalMessage = "This wagon does not exist.";
+			    return;
         	}
         }
 	    System.out.println("This train does not exist.");
-        return("This train does not exist.");
+	    finalMessage = "This train does not exist.";
+	    return;
+    }
+	
+    public String getFinalMessage() {
+		return finalMessage;
+    	
     }
 }

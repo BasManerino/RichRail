@@ -22,7 +22,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="id" layoutX="14.0" layoutY="89.0" prefHeight="26.0" prefWidth="104.0" promptText="Name" />
+                  <TextField fx:id="id" layoutX="20.0" layoutY="85.0" prefHeight="26.0" prefWidth="160.0" promptText="Name" />
                   <Pane layoutX="467.0" layoutY="14.0" prefHeight="290.0" prefWidth="700.0">
                      <children>
                         <BorderPane prefHeight="296.0" prefWidth="710.0" />
@@ -34,12 +34,12 @@
                   </Label>
                   <Button fx:id="trainbtn" layoutX="17.0" layoutY="214.0" mnemonicParsing="false" onAction="#getTrainFields" prefHeight="31.0" prefWidth="116.0" text="Create" />
                   <TextArea fx:id="commandview2" editable="false" layoutX="838.0" layoutY="304.0" prefHeight="263.0" prefWidth="341.0" />
-                  <Button layoutX="17.0" layoutY="376.0" mnemonicParsing="false" text="Select " />
+                  <Button layoutX="20.0" layoutY="376.0" mnemonicParsing="false" text="Select " />
                   <Button layoutX="105.0" layoutY="376.0" mnemonicParsing="false" text="Delete " />
                   <Label layoutX="25.0" layoutY="418.0" text="Selected Locomotive:" />
-                  <TextField fx:id="numseats" layoutX="14.0" layoutY="129.0" prefHeight="26.0" prefWidth="100.0" promptText="Num. Seats" />
-                  <TextField fx:id="maxweight" layoutX="14.0" layoutY="175.0" prefHeight="26.0" prefWidth="162.0" promptText="Maximale Vrachtgewicht" />
-                  <ComboBox layoutX="14.0" layoutY="337.0" prefWidth="150.0" promptText="Locomotive" />
+                  <TextField fx:id="numseats" layoutX="20.0" layoutY="130.0" prefHeight="26.0" prefWidth="160.0" promptText="Num. seats" />
+                  <TextField fx:id="maxweight" layoutX="25.0" layoutY="175.0" prefHeight="26.0" prefWidth="160.0" promptText="Max. weight" />
+                  <ComboBox layoutX="20.0" layoutY="337.0" prefWidth="150.0" promptText="Locomotive" />
                   <Label layoutX="284.0" layoutY="63.0" text="Create new wagon">
                      <font>
                         <Font size="16.0" />
@@ -47,8 +47,8 @@
                   </Label>
                   <TextField fx:id="command" layoutX="466.0" layoutY="576.0" prefHeight="26.0" prefWidth="298.0" promptText="Command" />
                   <Button fx:id="wagonbtn" layoutX="276.0" layoutY="214.0" mnemonicParsing="false" onAction="#getWagonFields" prefHeight="31.0" prefWidth="116.0" text="Create" />
-                  <TextField fx:id="numseatswagon" layoutX="284.0" layoutY="129.0" prefHeight="26.0" prefWidth="100.0" promptText="Num. Seats" />
-                  <TextField fx:id="maxweightwagon" layoutX="277.0" layoutY="175.0" prefHeight="26.0" prefWidth="162.0" promptText="Maximale Vrachtgewicht" />
+                  <TextField fx:id="numseatswagon" layoutX="275.0" layoutY="129.0" prefHeight="26.0" prefWidth="160.0" promptText="Num. seats" />
+                  <TextField fx:id="maxweightwagon" layoutX="275.0" layoutY="175.0" prefHeight="26.0" prefWidth="160.0" promptText="Max. weight" />
                   <Button layoutX="284.0" layoutY="376.0" mnemonicParsing="false" text="Select " />
                   <Button layoutX="376.0" layoutY="376.0" mnemonicParsing="false" text="Delete" />
                   <Label layoutX="307.0" layoutY="418.0" text="Selected Wagon: " />
@@ -56,8 +56,8 @@
                   <Button layoutX="73.0" layoutY="460.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="287.0" text="Add wagon to locomotive" />
                   <Button layoutX="73.0" layoutY="504.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="287.0" text="Remove wagon from locomotive" />
                   <TextArea fx:id="commandview" editable="false" layoutX="467.0" layoutY="304.0" prefHeight="263.0" prefWidth="296.0" />
-                  <Button fx:id="executebtn" layoutX="766.0" layoutY="573.0" mnemonicParsing="false" onAction="#executeCLI" prefHeight="32.0" prefWidth="72.0" text="Execute" />
-                  <TextField fx:id="idwagon" layoutX="282.0" layoutY="89.0" prefHeight="26.0" prefWidth="104.0" promptText="Name" />
+                  <Button fx:id="executebtn" layoutX="766.0" layoutY="573.0" mnemonicParsing="false" onAction="#execute" prefHeight="32.0" prefWidth="72.0" text="Execute" />
+                  <TextField fx:id="idwagon" layoutX="275.0" layoutY="89.0" prefHeight="26.0" prefWidth="160.0" promptText="Name" />
                   <Button fx:id="clickme" layoutX="191.0" layoutY="292.0" mnemonicParsing="false" onAction="#generateRandom" text="click me" />
                   <Label fx:id="myMessage" layoutX="191.0" layoutY="262.0" prefHeight="25.0" prefWidth="49.0" />
                   <ComboBox fx:id="comboBox" layoutX="274.0" layoutY="292.0" onAction="#comboChanged" prefWidth="150.0" promptText="select name" />

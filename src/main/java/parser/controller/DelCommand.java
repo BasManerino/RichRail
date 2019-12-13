@@ -15,9 +15,11 @@ import repository_iterator.Iterator;
 
 public class DelCommand {
 	
+	private String finalMessage;
+	
 	RichRailCli cli = new RichRailCli();
 	
-	public String execute(String id, String type) {
+	public void execute(String id, String type) {
     	//check if a locomotive or wagon should be deleted
     	switch(type) {
     	case "train":
@@ -39,7 +41,8 @@ public class DelCommand {
             		cli.allLocomotives.remove(locomotive);
 		    		cli.observer.setAll(cli.repo, cli.allLocomotives, cli.allWagons, cli.persister);
 				    System.out.println("Locomotive with id " + id + " has been succesfully deleted. All its attached wagons are deleted as well.");
-            		return("Locomotive with id " + id + " has been succesfully deleted. All its attached wagons are deleted as well.");
+            		finalMessage = "Locomotive with id " + id + " has been succesfully deleted. All its attached wagons are deleted as well.";
+				    return;
             	}
             }   
 	        
@@ -61,12 +64,19 @@ public class DelCommand {
 		    		cli.allWagons.remove(wagon);
 		    		cli.observer.setAll(cli.repo, cli.allLocomotives, cli.allWagons, cli.persister);
 				    System.out.println("Wagon with id " + id + " has been succesfully deleted. It shall be detached from its train if it was attached to one.");
-		    		return("Wagon with id " + id + " has been succesfully deleted. It shall be detached from its train if it was attached to one.");
+				    finalMessage = "Wagon with id " + id + " has been succesfully deleted. It shall be detached from its train if it was attached to one.";
+				    return;
 		    	}
 		    }  
 		default:
 		    System.out.println(type + " is not a valid component.");
-			return(type + " is not a valid component.");
+		    finalMessage = type + " is not a valid component.";
+		    return;
 		}
+    }
+	
+    public String getFinalMessage() {
+		return finalMessage;
+    	
     }
 }

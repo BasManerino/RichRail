@@ -27,9 +27,11 @@ import repository_iterator.Iterator;
 
 public class NewCommand {
 	
+	private String finalMessage;
+	
 	RichRailCli cli = new RichRailCli();
 
-	public String execute(String id, int numseats, float maxweight, String type) {
+	public void execute(String id, int numseats, float maxweight, String type) {
 
         if(type.equals("train"))
         {
@@ -37,7 +39,8 @@ public class NewCommand {
         		TrainComponent loco = iter.next();
             	if(loco.getId().equals(id)) {
 				    System.out.println("There already exists a train with this name, please choose another one.");
-            		return("There already exists a train with this name, please choose another one.");
+				    finalMessage = "There already exists a train with this name, please choose another one.";
+				    return;
             	}
             }
 
@@ -54,7 +57,8 @@ public class NewCommand {
             
             cli.observer.setLocomotives(cli.repo, cli.allLocomotives, cli.persister);
 		    	System.out.println("Train with id " + loco.getId() + " has been created.");
-    	        return("Train with id " + loco.getId() + " has been created.");
+		    	finalMessage = "Train with id " + loco.getId() + " has been created.";
+			    return;
         }
         
         else if(type.equals("wagon")) 
@@ -63,7 +67,8 @@ public class NewCommand {
         		String wagonid = iter.next().getId();
         		if(wagonid.equals(id)) {
 				    System.out.println("There already exists a wagon with this name, please choose another one.");
-            		return("There already exists a wagon with this name, please choose another one.");
+				    finalMessage = "There already exists a wagon with this name, please choose another one.";
+				    return;
             	}
             }
             
@@ -80,9 +85,16 @@ public class NewCommand {
             
             cli.observer.setWagons(cli.repo, cli.allWagons, cli.persister);
 		    	System.out.println("Wagon with name " + wagon.getId() + " has been created.");
-    	        return("Wagon with name " + wagon.getId() + " has been created.");
+		    	finalMessage = "Wagon with name " + wagon.getId() + " has been created.";
+			    return;
         }
 	    System.out.println("This is not a valid train component.");
-        return("This is not a valid train component.");
+	    finalMessage = "This is not a valid train component.";
+	    return;
+    }
+	
+    public String getFinalMessage() {
+		return finalMessage;
+    	
     }
 }

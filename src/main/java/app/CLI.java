@@ -15,7 +15,7 @@ import parser.RichRailListener;
 import parser.RichRailParser;
 
 public class CLI {
-	public void bootUp(String command) {
+	public String bootUp(String command) {
 
         String line = command;
         
@@ -31,9 +31,11 @@ public class CLI {
 
         // Create ParseTreeWalker and Custom Listener
         ParseTreeWalker walker = new ParseTreeWalker();
-        RichRailListener listener = new RichRailCli();
+        RichRailCli listener = new RichRailCli();
 
         // Walk over ParseTree using Custom Listener that listens to enter/exit events
         walker.walk(listener, tree);
+        
+        return listener.getFinalMessage();
 	}
 }

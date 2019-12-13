@@ -1,1 +1,14 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.textfield {
+	-fx-font-family: "Open sans";
+}
+
+.label {
+	-fx-font-family: "Open sans";
+}
+
+.button {
+	-fx-font-family: "Open sans";
+	-fx-text-fill: white;
+	-fx-background-color: #3867d6;
+}

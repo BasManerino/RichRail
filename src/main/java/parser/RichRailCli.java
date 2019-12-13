@@ -15,6 +15,8 @@ import parser.controller.*;
 
 public class RichRailCli extends RichRailBaseListener {
 	
+	public String finalMessage = null;
+	
 	public PersistenceAdapter persister = new PersistenceAdapter();
 	public Observer observer = new Observer();
 	public RepositoryManager repo = new RepositoryManager(); {
@@ -56,6 +58,7 @@ public class RichRailCli extends RichRailBaseListener {
         
         NewCommand command = new NewCommand();
         command.execute(id, numseats, maxweight, type);
+        finalMessage = command.getFinalMessage();
     }
     
     public void enterAddcommand(RichRailParser.AddcommandContext ctx) {
@@ -63,6 +66,7 @@ public class RichRailCli extends RichRailBaseListener {
         String locoid = ctx.ID().get(1).getText();
         AddCommand command = new AddCommand();
         command.execute(wagonid, locoid);
+        finalMessage = command.getFinalMessage();
     }
     
     public void enterGetcommand(RichRailParser.GetcommandContext ctx) {
@@ -71,6 +75,7 @@ public class RichRailCli extends RichRailBaseListener {
     	String option = ctx.option().getText();
         GetCommand command = new GetCommand();
         command.execute(id, type, option);
+        finalMessage = command.getFinalMessage();
     }
     
     public void enterDelcommand(RichRailParser.DelcommandContext ctx) {
@@ -78,6 +83,7 @@ public class RichRailCli extends RichRailBaseListener {
     	String type = ctx.type().getText();
         DelCommand command = new DelCommand();
         command.execute(id, type);
+        finalMessage = command.getFinalMessage();
     }
     
     public void enterRemcommand(RichRailParser.RemcommandContext ctx) {
@@ -85,5 +91,10 @@ public class RichRailCli extends RichRailBaseListener {
         String locoid = ctx.ID().get(1).getText();
         RemCommand command = new RemCommand();
         command.execute(wagonid, locoid);
+        finalMessage = command.getFinalMessage();
+    }
+    
+    public String getFinalMessage() {
+    	return finalMessage;
     }
 }

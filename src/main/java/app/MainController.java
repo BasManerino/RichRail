@@ -26,7 +26,8 @@ import abstract_classes.Wagon;
 import factory.LocomotiveBasedTrainFactory;
 import factory.TrainFactory;
 import factory.WagonBasedTrainFactory;
-public class MainController implements Initializable{
+
+public class MainController implements Initializable, Command{
 	@FXML
 	private Label myMessage;
 	public void generateRandom(ActionEvent event) {
@@ -103,7 +104,9 @@ public class MainController implements Initializable{
 		}
 		
 		NewCommand command = new NewCommand();
-		commandview2.setText(command.execute(id.getText(), numseats2, maxweight2, "train"));
+		command.execute(id.getText(), numseats2, maxweight2, "train");
+		commandview2.appendText(command.getFinalMessage());
+		commandview2.appendText("\n");
 	}
 	
 	public void getWagonFields (ActionEvent event) {
@@ -128,11 +131,16 @@ public class MainController implements Initializable{
 		}
 		
 		NewCommand command = new NewCommand();
-		commandview2.setText(command.execute(id.getText(), numseats2, maxweight2, "wagon"));
+		command.execute(id.getText(), numseats2, maxweight2, "wagon");
+		commandview2.appendText(command.getFinalMessage());
+		commandview2.appendText("\n");
 	}
 	
-	public void executeCLI(ActionEvent event) {
+	public void execute(ActionEvent event) {
 		CLI cli = new CLI();
-		cli.bootUp(command.getText());
+		commandview.appendText(command.getText());
+		commandview.appendText("\n");
+		commandview2.appendText(cli.bootUp(command.getText()));
+		commandview2.appendText("\n");
 	}
 }
