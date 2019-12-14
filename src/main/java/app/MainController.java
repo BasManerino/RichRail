@@ -11,61 +11,28 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import parser.RichRailCli;
-import parser.RichRailParser;
-import repository_iterator.Iterator;
 import parser.controller.*;
+import repository_iterator.Iterator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import com.ibm.icu.text.SimpleDateFormat;  
+import com.ibm.icu.text.SimpleDateFormat;
 
 import abstract_classes.Locomotive;
 import abstract_classes.TrainComponent;
-import abstract_classes.Wagon;
-import factory.LocomotiveBasedTrainFactory;
-import factory.TrainFactory;
-import factory.WagonBasedTrainFactory;
+import abstract_classes.Wagon; 
 
 public class MainController implements Initializable, Command{
-	@FXML
-	private Label myMessage;
-	public void generateRandom(ActionEvent event) {
-		Random rand = new Random();
-		int myrand = rand.nextInt(50) + 1;
-		myMessage.setText(Integer.toString(myrand));
-		System.out.println(Integer.toString(myrand));
-		
-	}
-	@FXML
-	public Label mylabel;
-	@FXML
-	public ComboBox<String> comboBox;
 	
-	ObservableList<String> list = FXCollections.observableArrayList("Mark", "Tom", "John", "Jack");
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		comboBox.setItems(list);
-		
+		updateView();
 	}
-	
-	public void comboChanged(ActionEvent event) {
-		comboBox.getItems().addAll("Ram", "Ben", "Steve", "Ma");
-		//mylabel.setText(comboBox.getValue());
-	}
-	
-	RichRailCli cli = new RichRailCli();
 	
 	@FXML
 	public Button executebtn;
@@ -93,6 +60,8 @@ public class MainController implements Initializable, Command{
 	public TextArea commandview;
 	@FXML
 	public TextArea commandview2;
+	@FXML
+	public TextArea trainview;
 	
 	public void getTrainFields (ActionEvent event) {
 		System.out.println(id.getText() + " " + numseats.getText() + " " + maxweight.getText());
@@ -154,12 +123,37 @@ public class MainController implements Initializable, Command{
 		commandview.appendText("\n");
 		commandview2.appendText(cli.bootUp(command.getText()));
 		commandview2.appendText("\n");
+		trainview.clear();
+		updateView();
 	}
 	
-	public void logToFile() throws IOException {
+	public void logToFile(ActionEvent event) throws IOException {
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss'.txt'").format(new Date());
 		PrintWriter writer = new PrintWriter("log_"+fileName, "UTF-8");
 		writer.write(commandview2.getText());
 		writer.close();
 	}
+	
+	public void updateView() {
+	    RichRailCli cli = new RichRailCli();
+		String viewText = "";
+		//write the locomotives and their attached wagons to the screen
+        for (Iterator iter = cli.allLocomotives.getIterator(); iter.hasNext();) {
+        	TrainComponent locomotive = iter.next();
+        	viewText = "(<" + locomotive.getClass().getSimpleName() + ">" + locomotive.getId() + ")";
+			for(TrainComponent wagon : ((Locomotive) locomotive).getComponentList()){
+				viewText = viewText + "-----" + "(<" + wagon.getClass().getSimpleName() + ">" + wagon.getId() + ")";
+			}
+			trainview.appendText(viewText);
+			trainview.appendText("\n");
+        }
+        //write the remaining loose wagons to the screen
+        trainview.appendText("\n");
+  		for (Iterator iter2 = cli.allWagons.getIterator(); iter2.hasNext();) {
+			TrainComponent wagon = iter2.next();
+			if(((Wagon) wagon).isAttached() == false){
+				trainview.appendText("(<" + wagon.getClass().getSimpleName() + ">" + wagon.getId() + "), ");
+			}
+	    }
+    }
 }
