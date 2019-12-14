@@ -62,6 +62,7 @@
                   <Label fx:id="myMessage" layoutX="191.0" layoutY="262.0" prefHeight="25.0" prefWidth="49.0" />
                   <ComboBox fx:id="comboBox" layoutX="274.0" layoutY="292.0" onAction="#comboChanged" prefWidth="150.0" promptText="select name" />
                   <Label fx:id="mylabel" layoutX="277.0" layoutY="266.0" text="Label" />
+                  <Button fx:id="logger" layoutX="983.0" layoutY="577.0" mnemonicParsing="false" onAction="#logToFile" text="Button" />
                </children></AnchorPane>
           </content>
           <expandableContent>

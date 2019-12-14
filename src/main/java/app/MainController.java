@@ -15,10 +15,20 @@ import parser.RichRailParser;
 import repository_iterator.Iterator;
 import parser.controller.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+import com.ibm.icu.text.SimpleDateFormat;  
 
 import abstract_classes.Locomotive;
 import abstract_classes.TrainComponent;
@@ -63,6 +73,8 @@ public class MainController implements Initializable, Command{
 	public Button trainbtn;
 	@FXML
 	public Button wagonbtn;
+	@FXML
+	public Button logger;
 	@FXML
 	public TextField id;
 	@FXML
@@ -142,5 +154,12 @@ public class MainController implements Initializable, Command{
 		commandview.appendText("\n");
 		commandview2.appendText(cli.bootUp(command.getText()));
 		commandview2.appendText("\n");
+	}
+	
+	public void logToFile() throws IOException {
+		String fileName = new SimpleDateFormat("yyyyMMddHHmmss'.txt'").format(new Date());
+		PrintWriter writer = new PrintWriter("log_"+fileName, "UTF-8");
+		writer.write(commandview2.getText());
+		writer.close();
 	}
 }
