@@ -14,8 +14,7 @@ public class Main extends Application {
             BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Main.fxml"));
 
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());        
 
             primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("app_icon.jpeg")));
             primaryStage.setTitle("RichRail");
