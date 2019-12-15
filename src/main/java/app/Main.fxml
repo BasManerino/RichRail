@@ -36,12 +36,11 @@
                   </Label>
                   <Button fx:id="trainbtn" layoutX="20.0" layoutY="214.0" mnemonicParsing="false" onAction="#getTrainFields" prefHeight="31.0" prefWidth="116.0" text="Create" />
                   <TextArea fx:id="commandview2" editable="false" layoutX="836.0" layoutY="318.0" prefHeight="263.0" prefWidth="341.0" />
-                  <Button layoutX="20.0" layoutY="360.0" mnemonicParsing="false" text="Select " />
-                  <Button layoutX="115.0" layoutY="360.0" mnemonicParsing="false" text="Delete " />
-                  <Label layoutX="20.0" layoutY="400.0" text="Selected Locomotive:" />
+                  <Button layoutX="20.0" layoutY="360.0" mnemonicParsing="false" text="Delete " />
+                  <Label fx:id="selectedLocomotive" layoutX="20.0" layoutY="400.0" />
                   <TextField fx:id="numseats" layoutX="20.0" layoutY="130.0" prefHeight="26.0" prefWidth="160.0" promptText="Num. seats" />
                   <TextField fx:id="maxweight" layoutX="20.0" layoutY="175.0" prefHeight="26.0" prefWidth="160.0" promptText="Max. weight" />
-                  <ComboBox layoutX="20.0" layoutY="320.0" prefWidth="150.0" promptText="Locomotive" />
+                  <ComboBox fx:id="locomotiveComboBox" layoutX="20.0" layoutY="320.0" onAction="#comboChanged" prefWidth="180.0" promptText="Select a locomotive" />
                   <Label layoutX="275.0" layoutY="63.0" text="Create new wagon">
                      <font>
                         <Font size="16.0" />
@@ -51,10 +50,9 @@
                   <Button fx:id="wagonbtn" layoutX="275.0" layoutY="214.0" mnemonicParsing="false" onAction="#getWagonFields" prefHeight="31.0" prefWidth="116.0" text="Create" />
                   <TextField fx:id="numseatswagon" layoutX="275.0" layoutY="130.0" prefHeight="26.0" prefWidth="160.0" promptText="Num. seats" />
                   <TextField fx:id="maxweightwagon" layoutX="275.0" layoutY="175.0" prefHeight="26.0" prefWidth="160.0" promptText="Max. weight" />
-                  <Button layoutX="275.0" layoutY="360.0" mnemonicParsing="false" text="Select " />
-                  <Button layoutX="370.0" layoutY="360.0" mnemonicParsing="false" text="Delete" />
-                  <Label layoutX="275.0" layoutY="400.0" text="Selected Wagon: " />
-                  <ComboBox layoutX="275.0" layoutY="320.0" prefWidth="150.0" promptText="Wagon" />
+                  <Button layoutX="275.0" layoutY="360.0" mnemonicParsing="false" text="Delete" />
+                  <Label fx:id="selectedWagon" layoutX="275.0" layoutY="400.0" />
+                  <ComboBox fx:id="wagonComboBox" layoutX="275.0" layoutY="320.0" onAction="#comboChanged2" prefWidth="180.0" promptText="Select a wagon" />
                   <Button layoutX="95.0" layoutY="490.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="287.0" text="Add wagon to locomotive" />
                   <Button layoutX="95.0" layoutY="530.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="287.0" text="Remove wagon from locomotive" />
                   <TextArea fx:id="commandview" editable="false" layoutX="467.0" layoutY="318.0" prefHeight="263.0" prefWidth="296.0" />
